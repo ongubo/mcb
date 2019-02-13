@@ -1,0 +1,43 @@
+{% extends 'loan/user/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <div class="container" style='padding-top:100px'>
+  <div class="row">
+    <div class="col col-example">.</div>
+    <div class="col col-example col-6" >
+     {% if form.errors %}
+  <ul>
+    {% for key,value in form.errors.items %} 
+      <li>{{ key|escape }} : {{ value|escape }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    <form class="text-center border border-light p-5" method='POST' action='{% url 'register' %}'>
+    <p class="h4 mb-4">Sign Up</p>
+    {% csrf_token %}
+  {% for field in u_form %}
+  {% if 'password' in field.html_name %}
+   <input type="password" id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="form-control mb-4" placeholder="{{field.label}}">
+   {% else %}
+    <input type="text" id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="form-control mb-4" placeholder="{{field.label}}">
+  {% endif %}
+    {{ field.errors }}
+        {% endfor %}
+          {% for field in p_form %}
+    {% if 'password' in field.html_name %}
+   <input type="password" id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="form-control mb-4" placeholder="{{field.label}}">
+   {% else %}
+    <input type="text" id="{{ field.id_for_label }}" name="{{ field.html_name }}" class="form-control mb-4" placeholder="{{field.label}}">
+  {% endif %}
+  {{ field.errors }}
+        {% endfor %}
+    <button class="btn btn-info btn-block my-4" type="submit">Apply To MCB</button>
+</form>
+    </div>
+    <div class="col col-example">.</div>
+  </div>
+</div>
+
+{% endblock %}
