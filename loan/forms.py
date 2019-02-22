@@ -21,6 +21,11 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class LoanForm(forms.ModelForm):
+    purpose = forms.CharField(
+        label='Loan Purpose', max_length=500, required=True, widget=forms.TextInput(attrs={'placeholder': 'Loan Purpose'}))
+    amount_requested = forms.DecimalField(
+        label=0, required=True, widget=forms.TextInput(attrs={'placeholder': 'Amount'}))
+
     class Meta:
         model = Loan
         fields = ['purpose', 'amount_requested']

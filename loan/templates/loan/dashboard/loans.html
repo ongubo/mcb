@@ -71,12 +71,10 @@
             <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body mx-3">
+          <div class="modal-body mx-10">
             {% for field in loan_form %}
-              <div class="md-form mb-5">
-                <i class="fas fa-money-bill-wave prefix grey-text"></i>
-                <input type="text" name="{{ field.html_name }}" id="{{ field.id_for_label }}"  class="form-control validate">
-                <label data-error="Error" data-success="Correct" for="{{ field.id_for_label }}">{{field.label}}</label>
+              <div class="md-form mb-10">
+                {{ field }}
                 {{ field.errors }}
               </div>
             {% endfor %}
