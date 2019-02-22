@@ -7,9 +7,11 @@ urlpatterns = [
     # User Views
     path('', views.home, name="home"),
     path('apply/', views.register_user, name="register"),
+    path('stats/', views.stats, name="stats"),
 
     # Authentivcation views
-    path('login/', auth_views.login,  {'template_name': 'loan/auth/login.html'}, name="login"),
+    path('login/', auth_views.login,
+         {'template_name': 'loan/auth/login.html'}, name="login"),
     path('logout/', auth_views.logout, {'next_page': '/'}, name="logout"),
 
     # Dashboard Views

@@ -4,10 +4,41 @@ from django.contrib.auth.models import User
 from .models import Loan
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, LoanForm
 from django.contrib.auth.decorators import login_required
+import matplotlib.pyplot as plt
 
 
 def home(request):
     return render(request, 'loan/user/index.html')
+
+
+def stats(request):
+    # graph = plt.plot(5)
+    # return graph
+    import random
+    import django
+    import datetime
+
+    from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+    from matplotlib.figure import Figure
+    from matplotlib.dates import DateFormatter
+
+    fig = Figure()
+    ax = fig.add_subplot(111)
+    x = []
+    y = []
+    now = datetime.datetime.now()
+    delta = datetime.timedelta(days=1)
+    for i in range(10):
+        x.append(now)
+        now += delta
+        y.append(random.randint(0, 1000))
+    ax.plot_date(x, y, '-')
+    ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d'))
+    fig.autofmt_xdate()
+    canvas = FigureCanvas(fig)
+    response = django.http.HttpResponse(content_type='image/png')
+    canvas.print_png(response)
+    return response
 
 
 def register_user(request):
